@@ -1,5 +1,6 @@
 package ru.avalon.java.dev.j10.labs.initialization;
 
+import java.util.Random;
 import ru.avalon.java.dev.j10.labs.Initializer;
 
 /**
@@ -14,6 +15,39 @@ import ru.avalon.java.dev.j10.labs.Initializer;
  * инициализации.
  */
 public class RandomInitializer implements Initializer {
+    private final Random random = new Random();
+    private int minRand;
+    private int maxRand;
+    private int rangeRand;
+
+    public RandomInitializer(int minRand, int maxRand) {
+        this.minRand = minRand;
+        this.maxRand = maxRand;
+        this.rangeRand = maxRand - minRand;
+    }
+
+    public void setMinRand(int minRand) {
+        this.minRand = minRand;
+    }
+
+    public void setMaxRand(int maxRand) {
+        this.maxRand = maxRand;
+    }
+
+    public int getMinRand() {
+        return minRand;
+    }
+
+    public int getMaxRand() {
+        return maxRand;
+    }
+
+    public int getRangeRand() {
+        return rangeRand;
+    }
+    
+    
+    
 
     /**
      * Выполняет инициализацию массива, значениями
@@ -21,9 +55,19 @@ public class RandomInitializer implements Initializer {
      *
      * @param array массив, подлежащий инициализации
      */
+    
     public void initialize(int[] array) {
         /*
-         * TODO(Студент): Реализовать метод initialize класса RandomInitializer
+         * Реализован метод initialize класса RandomInitializer
          */
+        if (minRand < 0) {
+            for (int i = 0; i < array.length; i++) {
+            array[i] = random.nextInt(rangeRand) + minRand;
+            }
+        } else {      
+         for (int i = 0; i < array.length; i++) {
+            array[i] = random.nextInt(rangeRand);
+        }
+    }
     }
 }
